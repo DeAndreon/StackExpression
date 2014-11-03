@@ -24,9 +24,10 @@ public class TestExpression {
 	
 		while(i<tokens.length){
 			//System.out.println(tokens[i]);
-			
+			/*ignoro spazi*/
 	        if(tokens[i]==' ')
 		         continue;
+	        /*controllo se il carattere iesimo è un numero altrimenti vedo se è un segno tra quelli ammessi*/
 		    if(tokens[i]>='0' && tokens[i]<='9'){
 			     StringBuilder sbuf = new StringBuilder();
 			     while(i+k<tokens.length && tokens[i+k] >= '0' && tokens[i+k] <='9'){
@@ -66,18 +67,20 @@ public class TestExpression {
 		     			
 				    	
 		            }  
-		     		
+		     		/*se trova una parentesi ) si svuota lo stack delle operazioni sistemando al top dello stack num il 
+		     		 * valore uscente da tutte le operazioni tra le parentesi eliminando la ( finale
+		     		 */
 		     		if(tokens[i]==')'){
-		     			 System.out.println(ops.pop());
+		     			// System.out.println(ops.pop());
 					     while(ops.top()!='('){
 	     				     /*svolgi le operazioni e poi elimina l'operazione dallo stack*/
 	     				     doOperation(ops.top(),num);
-	     				     System.out.println("WEILAAAAAAAAA"+ops.top());
+	     				     //System.out.println("WEILAAAAAAAAA"+ops.top());
 	     			         ops.pop();
 					
 					     
 				         }
-					System.out.println("WEILAAAAAAAAA"+ops.top());
+					//System.out.println("WEILAAAAAAAAA"+ops.top());
 				    ops.pop(); /*elimina la '('*/;
 	               }
 		     	}
@@ -93,12 +96,15 @@ public class TestExpression {
 	   
 	    
 	}
+	/*svuota lo stack delle operazioni in quanto si è assunto che moltiplicazioni e operaizoni tra parentesi
+	 *  siano state risolte 
+	 */
 	while(!ops.isEmpty()) {
 		doOperation(ops.top(),num);
 	    ops.pop();
 		
 	}
-	System.out.println("totale: "+num.pop());	
+	System.out.println("Totale: "+num.pop());	
 		
 		
 }
@@ -114,7 +120,7 @@ public class TestExpression {
 			    	//num.push(num.pop()*Integer.valueOf(Character.toString((tokens[i+1]))));
 			    	num.push(num.pop()*num.pop());
 			    	
-			    	System.out.println("PROVA:" +num.top());
+			    	//System.out.println("PROVA:" +num.top());
 			    	
 			        break;
 			    }
@@ -122,13 +128,13 @@ public class TestExpression {
 			    case '/':{
 			    	top= num.pop();
 			    	num.push((int)(num.pop()/top));
-			    	System.out.println(num.top());
+			    	//System.out.println(num.top());
 			        break;
 			    }
 
 				case '+':{
-					System.out.println(num.top());
-					System.out.println("size: "+num.size());
+					//System.out.println(num.top());
+					//System.out.println("size: "+num.size());
 					num.push(num.pop()+num.pop());
 				    break;	
 				    	
@@ -138,7 +144,7 @@ public class TestExpression {
 					  top= num.pop();
 					  
 					  num.push(num.pop()-top);
-				    	System.out.println(num.top());
+				    	//System.out.println(num.top());
 				    	
 				    break;
 				  }
