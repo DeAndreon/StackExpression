@@ -131,10 +131,50 @@ public class TestExpression {
 			    }
 
 				case '+':{
-					//System.out.println(num.top());
-					//System.out.println("size: "+num.size());
-					num.push(num.pop()+num.pop());
-				    break;	
+					
+					top= num.pop();
+					  /*controllo se lo stack dei segni non è vuota(entro nel caso in cui il numero è il primo della stringa che è senza segno perchè
+					   * positivo
+					   */
+					  if(!ops.isEmpty())	  
+					  {  
+						  /*controllo se il segno è positivo*/
+						  if(ops.top()=='+')
+						  /*se lo è allora vedo prima che segno ha l'operazione di sottrazoipnme che andrò a fare*/
+							  /* se il risoltato è positivo allora metto il ris in coda allo stack e non tocco lo stack dei segni
+							   * perchè alla successiva iterazione verrà fatta la somma col numero successivo
+							   * */
+							  num.push(num.pop()+top);
+							  
+						  else
+							  if(ops.top()=='-')
+						  {
+							 // System.out.println("sonoqui");
+							  /* qui viene il bello: il ris è < 0 allora salvo il modulo del numero nello stack e rimuovo il segno + dallo stack
+							   * delle operazioni e ci metto un meno così dopo alla prossima iterazione verrà correttemente eseguita una sottrazione
+							   */
+							 
+							  if((-num.top()+top)>0){
+								  num.push(Math.abs(-num.pop()+top));
+								  ops.pop();
+								  ops.push('+');
+								  
+							  }
+							 /*altrimenti non fai niente, rimango il - in quanto il ris è cmq numero negativo*/
+				
+						 
+					  }else{
+						  //caso della parentesi: non faccio pop perchè lo faccio sopra dopo  he la funzione è stata richiamata
+						  num.push(num.pop()+top);
+					  }
+					  }else{
+						  /*questo è il caso in cui siamo alla fine ovvero sono rimasti solo due numeri e quindi il segno del secondo numero non c'è
+						   * Allora qui non mi interessa il segno del risultato e salvo il risultato nello stack
+						   */
+						  num.push(num.pop()+top);
+					  }
+			    	
+			        break;	
 				    	
 				}
 				  /*dovrebbe essere risolto finalmente il problema, altro che inversione dello stack!*/
@@ -155,7 +195,8 @@ public class TestExpression {
 							   * */
 							  num.push(num.pop()-top);
 							  
-						  }else{
+						  }else
+						  {
 							 // System.out.println("sonoqui");
 							  /* qui viene il bello: il ris è < 0 allora salvo il modulo del numero nello stack e rimuovo il segno + dallo stack
 							   * delle operazioni e ci metto un meno così dopo alla prossima iterazione verrà correttemente eseguita una sottrazione
@@ -165,7 +206,7 @@ public class TestExpression {
 							  ops.push('-');
 							  
 						  }
-					  }else{
+					  }else if(ops.top()=='-'){
 						  //System.out.println((-num.top())-top);
 						  /*siamo nel caso che c'è il segno meno. 
 						   * Allora faccio al sottrazione del numero con il meno davanti in modo da avere il risultato corretto e mi salvo il modulo
@@ -175,6 +216,9 @@ public class TestExpression {
 						   */
 						  num.push(Math.abs((-num.pop())-top));
 						 
+					  }else{
+						  //caso della parentesi: non faccio pop perchè lo faccio sopra dopo  he la funzione è stata richiamata
+						  num.push(num.pop()-top);
 					  }
 					  }else{
 						  /*questo è il caso in cui siamo alla fine ovvero sono rimasti solo due numeri e quindi il segno del secondo numero non c'è
