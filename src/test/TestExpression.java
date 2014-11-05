@@ -147,8 +147,7 @@ public class TestExpression {
 							  num.push(num.pop()+top);
 							  
 						  else
-							  if(ops.top()=='-')
-						  {
+							  if(ops.top()=='-'){
 							 // System.out.println("sonoqui");
 							  /* qui viene il bello: il ris è < 0 allora salvo il modulo del numero nello stack e rimuovo il segno + dallo stack
 							   * delle operazioni e ci metto un meno così dopo alla prossima iterazione verrà correttemente eseguita una sottrazione
@@ -159,6 +158,9 @@ public class TestExpression {
 								  ops.pop();
 								  ops.push('+');
 								  
+							  }else{
+								  num.push(Math.abs(-num.pop()+top));
+								  /*non cancello il meno perchè comunque il numero è negativo*/
 							  }
 							 /*altrimenti non fai niente, rimango il - in quanto il ris è cmq numero negativo*/
 				
