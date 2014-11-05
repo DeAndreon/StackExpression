@@ -2,7 +2,7 @@ package test;
 
 import java.util.Scanner;
 
-import core.MyStack;
+import core.ExpressionStack;
 
 public class TestExpression {
 
@@ -19,8 +19,8 @@ public class TestExpression {
 		for(int j=0; j < expression.length(); j++){
 			System.out.println(tokens[j]);
 		}*/
-		MyStack<Integer> num = new MyStack<>();
-		MyStack<Character> ops = new MyStack<>();
+		ExpressionStack<Integer> num = new ExpressionStack<>();
+		ExpressionStack<Character> ops = new ExpressionStack<>();
 	
 		while(i<tokens.length){
 			//System.out.println(tokens[i]);
@@ -108,7 +108,7 @@ public class TestExpression {
 }
 		
 	
-    private static void doOperation(char c, MyStack<Integer> num, MyStack<Character> ops){
+    private static void doOperation(char c, ExpressionStack<Integer> num, ExpressionStack<Character> ops){
 
     	int top=0;
 			 switch(c){
