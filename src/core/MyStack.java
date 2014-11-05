@@ -2,7 +2,7 @@ package core;
 
 import java.util.EmptyStackException;
 
-public class ExpressionStack<T> implements Stack<T>{
+public class MyStack<T> implements Stack<T>{
     private int size;
     private Node<T> top; //punta all'ultimo elemento inserito
 	@Override
@@ -54,7 +54,7 @@ public class ExpressionStack<T> implements Stack<T>{
 		return size;
 	}
 
-	public ExpressionStack(){
+	public MyStack(){
 		
 		size=0;
 	    top=null;
